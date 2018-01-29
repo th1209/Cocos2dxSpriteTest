@@ -249,6 +249,11 @@
 		4B1B4088201EB33100C93185 /* cards.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B1B4086201EB33000C93185 /* cards.plist */; };
 		4B1B4089201EB33100C93185 /* cards.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1B4087201EB33100C93185 /* cards.png */; };
 		4BC94DAF20187F77003047AD /* GameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BC94DAD20187F77003047AD /* GameLayer.cpp */; };
+		4BCDF82C201F0AAC00C289A3 /* ParticleGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BCDF82A201F0AAC00C289A3 /* ParticleGenerator.cpp */; };
+		4BCDF835201F279D00C289A3 /* particle_boxel_green.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BCDF831201F279500C289A3 /* particle_boxel_green.plist */; };
+		4BCDF836201F279D00C289A3 /* particle_boxel_blue.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BCDF832201F279900C289A3 /* particle_boxel_blue.plist */; };
+		4BCDF837201F279D00C289A3 /* particle_boxel_red.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BCDF833201F279A00C289A3 /* particle_boxel_red.plist */; };
+		4BCDF838201F279D00C289A3 /* particle_boxel_orange.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BCDF834201F279C00C289A3 /* particle_boxel_orange.plist */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
@@ -786,6 +791,12 @@
 		4B1B4087201EB33100C93185 /* cards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cards.png; sourceTree = "<group>"; };
 		4BC94DAD20187F77003047AD /* GameLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameLayer.cpp; sourceTree = "<group>"; };
 		4BC94DAE20187F77003047AD /* GameLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameLayer.hpp; sourceTree = "<group>"; };
+		4BCDF82A201F0AAC00C289A3 /* ParticleGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleGenerator.cpp; sourceTree = "<group>"; };
+		4BCDF82B201F0AAC00C289A3 /* ParticleGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleGenerator.hpp; sourceTree = "<group>"; };
+		4BCDF831201F279500C289A3 /* particle_boxel_green.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = particle_boxel_green.plist; sourceTree = "<group>"; };
+		4BCDF832201F279900C289A3 /* particle_boxel_blue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = particle_boxel_blue.plist; sourceTree = "<group>"; };
+		4BCDF833201F279A00C289A3 /* particle_boxel_red.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = particle_boxel_red.plist; sourceTree = "<group>"; };
+		4BCDF834201F279C00C289A3 /* particle_boxel_orange.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = particle_boxel_orange.plist; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -1324,6 +1335,8 @@
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				4BC94DAD20187F77003047AD /* GameLayer.cpp */,
 				4BC94DAE20187F77003047AD /* GameLayer.hpp */,
+				4BCDF82A201F0AAC00C289A3 /* ParticleGenerator.cpp */,
+				4BCDF82B201F0AAC00C289A3 /* ParticleGenerator.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -1935,6 +1948,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4BCDF832201F279900C289A3 /* particle_boxel_blue.plist */,
+				4BCDF831201F279500C289A3 /* particle_boxel_green.plist */,
+				4BCDF834201F279C00C289A3 /* particle_boxel_orange.plist */,
+				4BCDF833201F279A00C289A3 /* particle_boxel_red.plist */,
 				4B1B4086201EB33000C93185 /* cards.plist */,
 				4B1B4087201EB33100C93185 /* cards.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
@@ -2028,7 +2045,11 @@
 				4B1B4089201EB33100C93185 /* cards.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
+				4BCDF838201F279D00C289A3 /* particle_boxel_orange.plist in Resources */,
+				4BCDF835201F279D00C289A3 /* particle_boxel_green.plist in Resources */,
 				4B1B4088201EB33100C93185 /* cards.plist in Resources */,
+				4BCDF837201F279D00C289A3 /* particle_boxel_red.plist in Resources */,
+				4BCDF836201F279D00C289A3 /* particle_boxel_blue.plist in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
@@ -2084,6 +2105,7 @@
 				15C0B57D196D412F007F909D /* UILabelBMFont.cpp in Sources */,
 				15A3D91A1682F7D5002FB0C5 /* b2Contact.cpp in Sources */,
 				15C0B593196D412F007F909D /* WidgetReader.cpp in Sources */,
+				4BCDF82C201F0AAC00C289A3 /* ParticleGenerator.cpp in Sources */,
 				15A3D91B1682F7D5002FB0C5 /* b2ContactSolver.cpp in Sources */,
 				15C0B57B196D412F007F909D /* UILabel.cpp in Sources */,
 				15C0B575196D412F007F909D /* UIListView.cpp in Sources */,

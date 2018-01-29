@@ -6,6 +6,7 @@
 //
 
 #include "GameLayer.hpp"
+#include "ParticleGenerator.hpp"
 
 const char* CARDS_PLIST = "cards.plist";
 const char* CARDS_PNG = "cards.png";
@@ -14,6 +15,8 @@ using namespace cocos2d;
 
 bool GameLayer::init()
 {
+    m_touching = false;
+
     // スプライトアトラスをキャッシュしておく.
     CCSpriteFrameCache* pCache = CCSpriteFrameCache::sharedSpriteFrameCache();
     pCache->addSpriteFramesWithFile(CARDS_PLIST, CARDS_PNG);
@@ -33,4 +36,41 @@ cocos2d::CCScene* GameLayer::createScene()
     GameLayer* pLayer = GameLayer::create();
     pScene->addChild(pLayer);
     return pScene;
+}
+
+void GameLayer::onEnter()
+{
+    CCNode::onEnter();
+
+    ParticleGenerator* pParticleGenerator = ParticleGenerator::create();
+    pParticleGenerator->setTag(tagParticleGenerator);
+    addChild(pParticleGenerator);
+
+    // タッチを有効化する.
+    setTouchEnabled(true);
+    setTouchMode(kCCTouchesOneByOne);
+}
+
+void GameLayer::onExit()
+{
+    CCNode::onExit();
+
+    setTouchEnabled(false);
+}
+
+bool GameLayer::ccTouchBegan(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent)
+{
+    if (m_touching)
+        return false;
+
+    ParticleGenerator* pParticleGenerator = (ParticleGenerator*)getChildByTag(tagParticleGenerator);
+    pParticleGenerator->generateRandomly(convertTouchToNodeSpace(pTouch));
+
+    m_touching = true;
+    return true;
+}
+
+void GameLayer::ccTouchEnded(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent)
+{
+    m_touching = false;
 }

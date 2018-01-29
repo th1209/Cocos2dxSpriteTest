@@ -15,6 +15,13 @@ extern const char* CARDS_PNG;
 
 class GameLayer : public cocos2d::CCLayer
 {
+private:
+    enum childTag
+    {
+        tagParticleGenerator
+    };
+    bool m_touching;
+
 public:
     // 初期化処理.
     virtual bool init();
@@ -24,6 +31,15 @@ public:
 
     // 自Layer & Scene作成用メソッド.
     static cocos2d::CCScene* createScene();
+
+    // シーン切替時に呼ばれる処理.
+    virtual void onEnter();
+    virtual void onExit();
+    
+    
+    bool ccTouchBegan(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent);
+    
+    void ccTouchEnded(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent);
 };
 
 #endif /* GameLayer_hpp */
