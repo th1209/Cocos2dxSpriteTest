@@ -3,6 +3,9 @@
 
 USING_NS_CC;
 
+const float BACK_GROUND_HEIGHT = 768.0f;
+const float BACK_GROUND_WIDTH  = 1364.0f;
+
 AppDelegate::AppDelegate() {
 
 }
@@ -23,6 +26,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
+
+    pDirector->setContentScaleFactor(BACK_GROUND_HEIGHT / pDirector->getWinSize().height);
 
     // create a scene. it's an autorelease object
     CCScene *pScene = GameLayer::createScene();

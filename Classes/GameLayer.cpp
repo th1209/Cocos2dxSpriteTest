@@ -8,8 +8,12 @@
 #include "GameLayer.hpp"
 #include "ParticleGenerator.hpp"
 
+
+const char* BACKGROUND_PNG = "background.png";
 const char* CARDS_PLIST = "cards.plist";
 const char* CARDS_PNG = "cards.png";
+
+
 
 using namespace cocos2d;
 
@@ -17,15 +21,93 @@ bool GameLayer::init()
 {
     m_touching = false;
 
+    m_cardPngArray.push_back("c01.png");
+    m_cardPngArray.push_back("c02.png");
+    m_cardPngArray.push_back("c03.png");
+    m_cardPngArray.push_back("c04.png");
+    m_cardPngArray.push_back("c05.png");
+    m_cardPngArray.push_back("c06.png");
+    m_cardPngArray.push_back("c07.png");
+    m_cardPngArray.push_back("c08.png");
+    m_cardPngArray.push_back("c09.png");
+    m_cardPngArray.push_back("c10.png");
+    m_cardPngArray.push_back("c11.png");
+    m_cardPngArray.push_back("c12.png");
+    m_cardPngArray.push_back("c13.png");
+    m_cardPngArray.push_back("d01.png");
+    m_cardPngArray.push_back("d02.png");
+    m_cardPngArray.push_back("d03.png");
+    m_cardPngArray.push_back("d04.png");
+    m_cardPngArray.push_back("d05.png");
+    m_cardPngArray.push_back("d06.png");
+    m_cardPngArray.push_back("d07.png");
+    m_cardPngArray.push_back("d08.png");
+    m_cardPngArray.push_back("d09.png");
+    m_cardPngArray.push_back("d10.png");
+    m_cardPngArray.push_back("d11.png");
+    m_cardPngArray.push_back("d12.png");
+    m_cardPngArray.push_back("d13.png");
+    m_cardPngArray.push_back("h01.png");
+    m_cardPngArray.push_back("h02.png");
+    m_cardPngArray.push_back("h03.png");
+    m_cardPngArray.push_back("h04.png");
+    m_cardPngArray.push_back("h05.png");
+    m_cardPngArray.push_back("h06.png");
+    m_cardPngArray.push_back("h07.png");
+    m_cardPngArray.push_back("h08.png");
+    m_cardPngArray.push_back("h09.png");
+    m_cardPngArray.push_back("h10.png");
+    m_cardPngArray.push_back("h11.png");
+    m_cardPngArray.push_back("h12.png");
+    m_cardPngArray.push_back("h13.png");
+    m_cardPngArray.push_back("s01.png");
+    m_cardPngArray.push_back("s02.png");
+    m_cardPngArray.push_back("s03.png");
+    m_cardPngArray.push_back("s04.png");
+    m_cardPngArray.push_back("s05.png");
+    m_cardPngArray.push_back("s06.png");
+    m_cardPngArray.push_back("s07.png");
+    m_cardPngArray.push_back("s08.png");
+    m_cardPngArray.push_back("s09.png");
+    m_cardPngArray.push_back("s10.png");
+    m_cardPngArray.push_back("s11.png");
+    m_cardPngArray.push_back("s12.png");
+    m_cardPngArray.push_back("s13.png");
+
     // スプライトアトラスをキャッシュしておく.
     CCSpriteFrameCache* pCache = CCSpriteFrameCache::sharedSpriteFrameCache();
     pCache->addSpriteFramesWithFile(CARDS_PLIST, CARDS_PNG);
 
-    // 試しに表示.
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    CCSprite* pTestCard = CCSprite::createWithSpriteFrameName("c01.png");
-    pTestCard->setPosition(ccp(winSize.width / 2, winSize.height / 2));
-    addChild(pTestCard);
+
+    // 背景画像の表示.
+    CCSprite* pBackground = CCSprite::create(BACKGROUND_PNG);
+    pBackground->setPosition(ccp(winSize.width / 2, winSize.height / 2));
+    addChild(pBackground, zBackground);
+
+    // 以下、トランプ全体表示用のtmpコード.
+    CCSprite* pTmpCard = CCSprite::createWithSpriteFrameName("c01.png");
+
+    float xOffset = pTmpCard->getContentSize().width * 1.1f;
+    float yOffset = pTmpCard->getContentSize().height * 0.3f;
+
+    float xBase = winSize.width  * 0.5f - xOffset * 3;
+    float yBase = winSize.height * 0.82f;
+
+    int xCardNum = 5;
+    int yCardNum = 7;
+
+    int curIndex = 0;
+    for (int y = 0; y < yCardNum; y++) {
+        for (int x = 0; x < xCardNum; x++) {
+            // TODO 本番コードでは、委譲で保持するか・タグ採番するかして管理すること.
+            CCSprite* pCard = CCSprite::createWithSpriteFrameName(m_cardPngArray[curIndex]);
+            CCPoint position = ccp(xBase + (xOffset + 0.5) * y, yBase - (yOffset + 0.5) * x);
+            pCard->setPosition(position);
+            addChild(pCard, zCard);
+            curIndex++;
+        }
+    }
 
     return true;
 }

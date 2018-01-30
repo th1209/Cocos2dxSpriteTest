@@ -8,20 +8,10 @@
 #ifndef GameLayer_h
 #define GameLayer_h
 
-extern const char* CARDS_PLIST;
-extern const char* CARDS_PNG;
-
 #include "cocos2d.h"
 
 class GameLayer : public cocos2d::CCLayer
 {
-private:
-    enum childTag
-    {
-        tagParticleGenerator
-    };
-    bool m_touching;
-
 public:
     // 初期化処理.
     virtual bool init();
@@ -40,6 +30,20 @@ public:
     bool ccTouchBegan(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent);
     
     void ccTouchEnded(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent);
+private:
+    enum childTag
+    {
+        tagParticleGenerator
+    };
+    
+    enum childZOrder
+    {
+        zBackground,
+        zCard,
+    };
+    
+    bool m_touching;
+    std::vector<const char*> m_cardPngArray;
 };
 
 #endif /* GameLayer_hpp */
