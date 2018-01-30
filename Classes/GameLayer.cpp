@@ -6,13 +6,13 @@
 //
 
 #include "GameLayer.hpp"
+#include "TitleLayer.hpp"
 #include "ParticleGenerator.hpp"
 
 
 const char* BACKGROUND_PNG = "background.png";
 const char* CARDS_PLIST = "cards.plist";
 const char* CARDS_PNG = "cards.png";
-
 
 
 using namespace cocos2d;
@@ -109,6 +109,9 @@ bool GameLayer::init()
         }
     }
 
+    // その他メニュー等.
+    showToTitleLayerButton();
+
     return true;
 }
 
@@ -155,4 +158,20 @@ bool GameLayer::ccTouchBegan(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent)
 void GameLayer::ccTouchEnded(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent)
 {
     m_touching = false;
+}
+
+void GameLayer::toTitleLayerCallback(cocos2d::CCObject *pSender)
+{
+    CCScene* scene = TitleLayer::createScene();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionFadeBL::create(2.0f, scene));
+}
+
+void GameLayer::showToTitleLayerButton()
+{
+    CCMenuItemLabel * pToTitleLayerLabel = CCMenuItemFont::create("タイトルシーンへ", this, menu_selector(GameLayer::toTitleLayerCallback));
+    CCMenu* pMenu = CCMenu::create(pToTitleLayerLabel, NULL);
+    
+    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    pMenu->setPosition(ccp(winSize.width * 0.85f, winSize.height * 0.2f));
+    addChild(pMenu);
 }

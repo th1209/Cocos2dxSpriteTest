@@ -31,6 +31,9 @@ public:
     
     void ccTouchEnded(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent);
 private:
+    void toTitleLayerCallback(cocos2d::CCObject *pSender);
+    void showToTitleLayerButton();
+
     enum childTag
     {
         tagParticleGenerator

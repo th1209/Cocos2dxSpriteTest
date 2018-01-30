@@ -1,4 +1,5 @@
 #include "AppDelegate.h"
+#include "TitleLayer.hpp"
 #include "GameLayer.hpp"
 
 USING_NS_CC;
@@ -30,7 +31,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     pDirector->setContentScaleFactor(BACK_GROUND_HEIGHT / pDirector->getWinSize().height);
 
     // create a scene. it's an autorelease object
-    CCScene *pScene = GameLayer::createScene();
+    //CCScene *pScene = GameLayer::createScene();
+    CCScene *pScene = TitleLayer::createScene();
 
     // run
     pDirector->runWithScene(pScene);
