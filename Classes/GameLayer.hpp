@@ -30,6 +30,9 @@ public:
     bool ccTouchBegan(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent);
     
     void ccTouchEnded(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent);
+
+    void moveSprite(CCNode* node, void* moveTo);
+
 private:
     void toTitleLayerCallback(cocos2d::CCObject *pSender);
     void showToTitleLayerButton();
@@ -38,14 +41,15 @@ private:
     {
         tagParticleGenerator
     };
-    
+
     enum childZOrder
     {
         zBackground,
         zCard,
     };
-    
+
     bool m_touching;
+    cocos2d::CCPoint m_cardMovePoint;
     std::vector<const char*> m_cardPngArray;
 };
 

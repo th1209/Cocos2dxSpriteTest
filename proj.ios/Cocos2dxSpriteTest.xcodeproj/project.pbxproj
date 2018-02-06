@@ -246,6 +246,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		4B1FC83F2023F5A3003BCCDC /* Card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B1FC83D2023F5A3003BCCDC /* Card.cpp */; };
 		4BC94DAF20187F77003047AD /* GameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BC94DAD20187F77003047AD /* GameLayer.cpp */; };
 		4BCDF82C201F0AAC00C289A3 /* ParticleGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BCDF82A201F0AAC00C289A3 /* ParticleGenerator.cpp */; };
 		4BCDF835201F279D00C289A3 /* particle_boxel_green.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BCDF831201F279500C289A3 /* particle_boxel_green.plist */; };
@@ -789,6 +790,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		37C62C0718E156AE00D16FC4 /* ExtensionExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtensionExport.h; sourceTree = "<group>"; };
+		4B1FC83D2023F5A3003BCCDC /* Card.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Card.cpp; sourceTree = "<group>"; };
+		4B1FC83E2023F5A3003BCCDC /* Card.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Card.hpp; sourceTree = "<group>"; };
 		4BC94DAD20187F77003047AD /* GameLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameLayer.cpp; sourceTree = "<group>"; };
 		4BC94DAE20187F77003047AD /* GameLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameLayer.hpp; sourceTree = "<group>"; };
 		4BCDF82A201F0AAC00C289A3 /* ParticleGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleGenerator.cpp; sourceTree = "<group>"; };
@@ -1344,6 +1347,8 @@
 				4BCDF82B201F0AAC00C289A3 /* ParticleGenerator.hpp */,
 				4BCDF84920205C8400C289A3 /* TitleLayer.cpp */,
 				4BCDF84A20205C8400C289A3 /* TitleLayer.hpp */,
+				4B1FC83D2023F5A3003BCCDC /* Card.cpp */,
+				4B1FC83E2023F5A3003BCCDC /* Card.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -2199,6 +2204,7 @@
 				15A3DA381682F826002FB0C5 /* CCControlButtonLoader.cpp in Sources */,
 				15A3DA391682F826002FB0C5 /* CCControlLoader.cpp in Sources */,
 				15A3DA3A1682F826002FB0C5 /* CCData.cpp in Sources */,
+				4B1FC83F2023F5A3003BCCDC /* Card.cpp in Sources */,
 				15A3DA3B1682F826002FB0C5 /* CCLabelBMFontLoader.cpp in Sources */,
 				15C0B556196D412F007F909D /* CCArmatureAnimation.cpp in Sources */,
 				15C0B568196D412F007F909D /* CCUtilMath.cpp in Sources */,
