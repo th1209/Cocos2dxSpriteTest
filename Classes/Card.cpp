@@ -13,6 +13,9 @@ using namespace cocos2d;
 const int CARD_NUM_MIN = 1;
 const int CARD_NUM_MAX = 13;
 
+// 他のオブジェクトと番号が被らないようにするための番号.
+const int CARD_TAG_NUMBER = 100000;
+
 vector<Card::Suit> Card::getSuits()
 {
     vector<Card::Suit> suits;
@@ -60,7 +63,7 @@ bool Card::initWithNumAndSuit(int num, Suit suit)
     m_number = num;
     m_suit = suit;
 
-    CCAssert(num >= CARD_NUM_MIN && CARD_NUM_MAX <= num, "invalid number.");
+    CCAssert(num >= CARD_NUM_MIN && num <= CARD_NUM_MAX, "invalid number.");
     
     map<Suit, string> suitMap;
     suitMap[club]  = "c";
@@ -84,4 +87,9 @@ bool Card::isTouched(cocos2d::CCPoint touchPoint)
     int h = this->getContentSize().height;
     CCRect rect = CCRectMake(pos.x - (w/2), pos.y - (h/2), w, h);
     return rect.containsPoint(touchPoint);
+}
+
+int Card::getTag()
+{
+    return CARD_TAG_NUMBER + m_number * 100 + (int)m_suit;
 }

@@ -9,6 +9,7 @@
 #define GameLayer_h
 
 #include "cocos2d.h"
+#include "Card.hpp"
 
 class GameLayer : public cocos2d::CCLayer
 {
@@ -36,6 +37,8 @@ public:
 private:
     void toTitleLayerCallback(cocos2d::CCObject *pSender);
     void showToTitleLayerButton();
+    void initCards();
+    std::vector<Card*> getCards();
 
     enum childTag
     {
@@ -51,6 +54,7 @@ private:
     bool m_touching;
     cocos2d::CCPoint m_cardMovePoint;
     std::vector<const char*> m_cardPngArray;
+    std::vector<int> m_cardTags;
 };
 
 #endif /* GameLayer_hpp */

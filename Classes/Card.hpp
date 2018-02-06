@@ -29,6 +29,7 @@ public:
     virtual ~Card();
 
     bool isTouched(cocos2d::CCPoint touchPoint);
+    int getTag();
 
 protected:
     int m_number;

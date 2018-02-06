@@ -11,6 +11,9 @@
 #include "ParticleGenerator.hpp"
 
 const float CARD_MOVE_SPEED = 0.5f;
+const float CARD_MOVE_POS_X = 800.0f;
+const float CARD_MOVE_POS_Y = 150.0f;
+
 const char* BACKGROUND_PNG = "background.png";
 const char* CARDS_PLIST = "cards.plist";
 const char* CARDS_PNG = "cards.png";
@@ -86,37 +89,58 @@ bool GameLayer::init()
     pBackground->setPosition(ccp(winSize.width / 2, winSize.height / 2));
     addChild(pBackground, zBackground);
 
-//    // 以下、トランプ全体表示用のtmpコード.
-//    CCSprite* pTmpCard = CCSprite::createWithSpriteFrameName("c01.png");
-//
-//    float xOffset = pTmpCard->getContentSize().width * 1.1f;
-//    float yOffset = pTmpCard->getContentSize().height * 0.3f;
-//
-//    float xBase = winSize.width  * 0.5f - xOffset * 3;
-//    float yBase = winSize.height * 0.82f;
-//
-//    int xCardNum = 5;
-//    int yCardNum = 7;
-//
-//    int curIndex = 0;
-//    for (int y = 0; y < yCardNum; y++) {
-//        for (int x = 0; x < xCardNum; x++) {
-//            // TODO 本番コードでは、委譲で保持するか・タグ採番するかして管理すること.
-//            CCSprite* pCard = CCSprite::createWithSpriteFrameName(m_cardPngArray[curIndex]);
-//            CCPoint position = ccp(xBase + (xOffset + 0.5) * y, yBase - (yOffset + 0.5) * x);
-//            pCard->setPosition(position);
-//            addChild(pCard, zCard);
-//            curIndex++;
-//        }
-//    }
-    
-    Card* pCard = Card::createWithNumAndSuit(13, Card::spade);
-    pCard->setPosition(ccp(winSize.width / 2, winSize.height / 2));
-    addChild(pCard, 5, 100);
+    // カード画像の表示.
+    initCards();
 
     // その他メニュー等.
     showToTitleLayerButton();
     return true;
+}
+
+void GameLayer::initCards()
+{
+    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    CCSprite* pTmpCard = CCSprite::createWithSpriteFrameName("c01.png");
+    
+    float xOffset = pTmpCard->getContentSize().width * 1.1f;
+    float yOffset = pTmpCard->getContentSize().height * 0.3f;
+    
+    float xBase = winSize.width  * 0.5f - xOffset * 3;
+    float yBase = winSize.height * 0.82f;
+    
+    int xCardNum = 5;
+    int yCardNum = 7;
+    int cardMax = xCardNum * yCardNum;
+    int curIndex = 0;
+
+    std::vector<Card::Suit> suits = Card::getSuits();
+    std::vector<int> numbers      = Card::getNumbers();
+
+    std::vector<Card::Suit>::iterator suitIt = suits.begin();
+    while (suitIt != suits.end())
+    {
+        std::vector<int>::iterator numberIt = numbers.begin();
+        while (numberIt != numbers.end())
+        {
+            Card* pCard = Card::createWithNumAndSuit((*numberIt), (*suitIt));
+            CCPoint position = ccp(xBase + (xOffset + 0.5) * (int)(curIndex / 5), yBase - (yOffset + 0.5) * (int)(curIndex % 5));
+            pCard->setPosition(position);
+            int cardTag = pCard->getTag();
+            addChild(pCard, zCard, cardTag);
+            m_cardTags.push_back(cardTag);
+            
+            curIndex++;
+            if (curIndex == cardMax)
+            {
+                return;
+            }
+
+            numberIt++;
+        }
+        suitIt++;
+    }
+    
+    return;
 }
 
 cocos2d::CCScene* GameLayer::createScene()
@@ -155,17 +179,19 @@ bool GameLayer::ccTouchBegan(cocos2d::CCTouch* pTouch, cocos2d::CCEvent* pEvent)
     ParticleGenerator* pParticleGenerator = (ParticleGenerator*)getChildByTag(tagParticleGenerator);
     pParticleGenerator->generateRandomly(convertTouchToNodeSpace(pTouch));
 
-    // カード1枚をタッチした箇所に動かす.
-    CCPoint movePoint = convertTouchToNodeSpace(pTouch);
-    CCMoveTo* pMoveTo = CCMoveTo::create(CARD_MOVE_SPEED, movePoint);
-    Card* pCard = (Card*)getChildByTag(100);
-    pCard->runAction(pMoveTo);
-
-    // カード1枚をタッチした箇所に動かす(CCCallFuncNDを使う場合).
-//    m_cardMovePoint = convertTouchToNodeSpace(pTouch);
-//    CCCallFuncND* pMoveFunc = CCCallFuncND::create(this, callfuncND_selector(GameLayer::moveSprite), (void*)&m_cardMovePoint);
-//    Card* pCard = (Card*)getChildByTag(100);
-//    pCard->runAction(pMoveFunc);
+    CCPoint touchPoint = convertTouchToNodeSpace(pTouch);
+    CCMoveTo* pMoveTo = CCMoveTo::create(CARD_MOVE_SPEED, ccp(CARD_MOVE_POS_X, CARD_MOVE_POS_Y));
+    std::vector<Card*> cards = getCards();
+    std::vector<Card*>::iterator it = cards.begin();
+    while (it != cards.end())
+    {
+        if ((*it)->isTouched(touchPoint))
+        {
+            (*it)->runAction(pMoveTo);
+            break;
+        }
+        it++;
+    }
 
     m_touching = true;
     return true;
@@ -195,6 +221,18 @@ void GameLayer::showToTitleLayerButton()
 void GameLayer::moveSprite(CCNode* node, void* moveTo)
 {
     CCPoint* pos = static_cast<CCPoint*>(moveTo);
-    CCLog("%s :2 x:%f y:%f",__PRETTY_FUNCTION__, pos->x, pos->y);
     node->setPosition(*pos);
+}
+
+std::vector<Card*> GameLayer::getCards()
+{
+    std::vector<Card*> cards;
+    std::vector<int>::iterator it = m_cardTags.begin();
+    while (it != m_cardTags.end())
+    {
+        Card* pCard = (Card*)getChildByTag(*it);
+        cards.push_back(pCard);
+        it++;
+    }
+    return cards;
 }
